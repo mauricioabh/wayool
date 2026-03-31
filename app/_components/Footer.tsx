@@ -2,33 +2,37 @@
 
 import { motion } from "framer-motion";
 import { Github, Instagram, Linkedin, Mail, X } from "lucide-react";
+import Link from "next/link";
 import { fadeUp, staggerContainer } from "@/app/_lib/motion";
 
 const FOOTER_COLS = [
   {
     title: "Company",
     links: [
-      { label: "About", href: "#about" },
-      { label: "Blog", href: "#" },
-      { label: "Careers", href: "#" },
+      { label: "About", href: "/#about" },
+      { label: "Blog", href: "/blog" },
+      { label: "Careers", href: "/careers" },
     ],
   },
   {
     title: "Legal",
     links: [
-      { label: "Privacy", href: "#" },
-      { label: "Terms", href: "#" },
-      { label: "Cookies", href: "#" },
+      { label: "Privacy", href: "/legal/privacy" },
+      { label: "Terms", href: "/legal/terms" },
+      { label: "Cookies", href: "/legal/cookies" },
     ],
   },
   {
     title: "Support",
     links: [
-      { label: "Help center", href: "#" },
-      { label: "FAQ", href: "#" },
+      { label: "Help center", href: "/support/help" },
+      { label: "FAQ", href: "/support/faq" },
     ],
   },
 ] as const;
+
+const footerLinkClassName =
+  "min-h-[44px] inline-flex items-center text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--text-primary)]";
 
 const SOCIALS = [
   { href: "https://twitter.com", label: "X", Icon: X },
@@ -121,12 +125,9 @@ export function Footer() {
                 <ul className="mt-4 space-y-2">
                   {col.links.map((link) => (
                     <li key={link.label}>
-                      <a
-                        href={link.href}
-                        className="min-h-[44px] inline-flex items-center text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--text-primary)]"
-                      >
+                      <Link href={link.href} className={footerLinkClassName}>
                         {link.label}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>

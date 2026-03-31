@@ -15,25 +15,19 @@
  */
 
 import { AppShowcase } from "@/app/_components/AppShowcase";
-import { Footer } from "@/app/_components/Footer";
 import { Hero } from "@/app/_components/Hero";
 import { HowItWorks } from "@/app/_components/HowItWorks";
-import { Navbar } from "@/app/_components/Navbar";
 import { ValueProps } from "@/app/_components/ValueProps";
 import { Waitlist } from "@/app/_components/Waitlist";
 
 export default function Home() {
   return (
     <>
-      <Navbar />
-      <main id="main-content" aria-label="Main content">
-        <Hero />
-        <AppShowcase />
-        <ValueProps />
-        <HowItWorks />
-        <Waitlist />
-      </main>
-      <Footer />
+      <Hero />
+      <AppShowcase />
+      <ValueProps />
+      <HowItWorks />
+      <Waitlist />
     </>
   );
 }

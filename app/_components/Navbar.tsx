@@ -2,14 +2,16 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 import { GlowButton } from "@/app/_components/ui/GlowButton";
 
 const NAV_LINKS = [
-  { href: "#solutions", label: "Solutions" },
-  { href: "#apps", label: "Apps" },
-  { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#solutions", label: "Solutions" },
+  { href: "/#apps", label: "Apps" },
+  { href: "/#about", label: "About" },
+  { href: "/#contact", label: "Contact" },
 ] as const;
 
 function LogoMark() {
@@ -43,8 +45,17 @@ function LogoMark() {
 }
 
 export function Navbar() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const scrollToContact = useCallback(() => {
+    if (pathname === "/") {
+      document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
+      return;
+    }
+    window.location.assign("/#contact");
+  }, [pathname]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -74,28 +85,28 @@ export function Navbar() {
           scrolled ? "" : "border-b border-[var(--border-subtle)]"
         }`}
       >
-        <a
-          href="#home"
+        <Link
+          href="/"
           className="flex min-h-[44px] min-w-[44px] items-center gap-2 text-[var(--text-primary)]"
         >
           <LogoMark />
           <span className="font-display text-lg font-bold tracking-tight">
             Wayool
           </span>
-        </a>
+        </Link>
 
         <nav
           aria-label="Primary"
           className="hidden items-center gap-8 lg:flex"
         >
           {NAV_LINKS.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="text-sm font-medium text-[var(--text-muted)] transition-colors hover:text-[var(--accent)]"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -103,11 +114,7 @@ export function Navbar() {
           <GlowButton
             type="button"
             className="!px-5 !py-2.5 !text-sm"
-            onClick={() => {
-              document
-                .querySelector("#contact")
-                ?.scrollIntoView({ behavior: "smooth" });
-            }}
+            onClick={scrollToContact}
           >
             Join waitlist
           </GlowButton>
@@ -143,17 +150,20 @@ export function Navbar() {
               className="flex flex-col gap-1 px-4 py-4 sm:px-6"
             >
               {NAV_LINKS.map((link, i) => (
-                <motion.a
+                <motion.div
                   key={link.href}
-                  href={link.href}
                   initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.04 * i }}
-                  className="min-h-[44px] rounded-xl px-3 py-3 text-base font-medium text-[var(--text-primary)] hover:bg-[var(--surface)]"
-                  onClick={() => setOpen(false)}
                 >
-                  {link.label}
-                </motion.a>
+                  <Link
+                    href={link.href}
+                    className="flex min-h-[44px] items-center rounded-xl px-3 py-3 text-base font-medium text-[var(--text-primary)] hover:bg-[var(--surface)]"
+                    onClick={() => setOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
               ))}
               <div className="pt-2">
                 <GlowButton
@@ -161,9 +171,7 @@ export function Navbar() {
                   className="w-full"
                   onClick={() => {
                     setOpen(false);
-                    document
-                      .querySelector("#contact")
-                      ?.scrollIntoView({ behavior: "smooth" });
+                    scrollToContact();
                   }}
                 >
                   Join waitlist
