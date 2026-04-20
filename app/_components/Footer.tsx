@@ -18,6 +18,10 @@ const FOOTER_COLS = [
     title: "Legal",
     links: [
       { label: "Privacy", href: "/legal/privacy" },
+      {
+        label: "Luz Parroquial — Privacy",
+        href: "/legal/privacy/luz-parroquial",
+      },
       { label: "Terms", href: "/legal/terms" },
       { label: "Cookies", href: "/legal/cookies" },
     ],

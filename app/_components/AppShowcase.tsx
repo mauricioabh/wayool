@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
-import { HeartPulse, Landmark, Sparkles, Smartphone } from "lucide-react";
+import { HeartPulse, Landmark, Smartphone, Sun } from "lucide-react";
+import Link from "next/link";
 import { SectionWrapper } from "@/app/_components/ui/SectionWrapper";
 import { fadeUp, staggerContainer } from "@/app/_lib/motion";
 
@@ -11,6 +12,8 @@ type AppShowcaseItem = {
   category: string;
   icon: LucideIcon;
   benefit: string;
+  playSoonLabel?: string;
+  privacyHref?: string;
   version: string;
   status: string;
   featured?: boolean;
@@ -18,12 +21,14 @@ type AppShowcaseItem = {
 
 const APPS: AppShowcaseItem[] = [
   {
-    name: "Lumina",
-    category: "Productivity",
-    icon: Sparkles,
+    name: "Luz Parroquial — Prayer",
+    category: "Prayer",
+    icon: Sun,
     benefit:
-      "Cut through the noise and reclaim focus: your day gets structure back without the burnout of constant context switching.",
-    version: "v0.8.4",
+      "Catholic prayer and devotion in Spanish—classic prayers, novenas, the rosary, and guided audio for when you want to pray without staring at the screen. Create an account to keep favorites and progress in sync across devices.",
+    playSoonLabel: "Coming soon · Google Play",
+    privacyHref: "/legal/privacy/luz-parroquial",
+    version: "v0.1.0",
     status: "In development",
     featured: true,
   },
@@ -47,16 +52,78 @@ const APPS: AppShowcaseItem[] = [
   },
 ];
 
-function PlaySoonBadge() {
+function PlaySoonBadge({ label = "Coming soon · Web & mobile" }: { label?: string }) {
   return (
     <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/10 px-3 py-1 text-xs font-semibold text-[var(--accent)]">
       <Smartphone className="size-3.5 shrink-0" aria-hidden />
-      Coming soon · Web &amp; mobile
+      {label}
     </span>
   );
 }
 
+function AppCard({ app, isFeatured = false }: { app: AppShowcaseItem; isFeatured?: boolean }) {
+  const Icon = app.icon;
+  return (
+    <motion.article
+      className={`glass-panel flex flex-col rounded-2xl p-6 shadow-card transition-colors sm:p-8 ${
+        isFeatured ? "" : "min-h-0 h-full md:h-full lg:h-auto"
+      }`}
+      whileHover={{
+        scale: 1.02,
+        boxShadow:
+          "0 32px 96px -28px rgba(0,0,0,0.9), 0 0 48px -12px rgba(34,211,238,0.35)",
+      }}
+      transition={{ type: "spring", stiffness: 380, damping: 26 }}
+    >
+      <div className="flex items-start justify-between gap-3">
+        <div
+          className="flex size-12 items-center justify-center rounded-2xl bg-[var(--accent)]/15 text-[var(--accent)]"
+          aria-hidden
+        >
+          <Icon className="size-6" strokeWidth={1.75} />
+        </div>
+        <PlaySoonBadge label={app.playSoonLabel} />
+      </div>
+
+      <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+        {app.category}
+      </p>
+      <h3 className="font-display mt-1 text-2xl font-bold text-[var(--text-primary)] sm:text-3xl">
+        {app.name}
+      </h3>
+      <p
+        className={`mt-4 text-sm leading-relaxed text-[var(--text-muted)] sm:text-base ${
+          isFeatured ? "max-w-xl" : "min-h-0 flex-1 lg:flex-none"
+        }`}
+      >
+        {app.benefit}
+      </p>
+
+      <div className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-[var(--border-subtle)] pt-5 text-xs text-[var(--text-muted)]">
+        <span className="rounded-md bg-[var(--surface)] px-2 py-1 font-mono text-[11px] text-[var(--highlight-muted)]">
+          {app.version}
+        </span>
+        <span className="text-[var(--text-muted)]">·</span>
+        <span>{app.status}</span>
+        {app.privacyHref ? (
+          <>
+            <span className="text-[var(--text-muted)]">·</span>
+            <Link
+              href={app.privacyHref}
+              className="font-semibold text-[var(--accent)] transition-colors hover:text-[var(--highlight)]"
+            >
+              Privacy policy
+            </Link>
+          </>
+        ) : null}
+      </div>
+    </motion.article>
+  );
+}
+
 export function AppShowcase() {
+  const featuredApp = APPS.find((a) => a.featured);
+  const otherApps = APPS.filter((a) => !a.featured);
   return (
     <SectionWrapper id="apps" className="relative z-[1] scroll-mt-24 py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -86,72 +153,32 @@ export function AppShowcase() {
         </motion.div>
 
         <motion.ul
-          className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:mt-14 lg:grid-cols-3 lg:grid-rows-2"
+          className="mt-12 flex list-none flex-col gap-4 p-0 md:grid md:grid-cols-2 md:items-stretch lg:mt-14 lg:flex lg:flex-row lg:items-start"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
           variants={staggerContainer}
           aria-label="Wayool apps"
         >
-          {APPS.map((app, index) => {
-            const Icon = app.icon;
-            const isFeatured = Boolean(app.featured);
-            const smallPlacement =
-              index === 1
-                ? "lg:col-start-3 lg:row-start-1"
-                : index === 2
-                  ? "lg:col-start-3 lg:row-start-2"
-                  : "";
-            return (
-              <motion.li
-                key={app.name}
-                variants={fadeUp}
-                className={`${
-                  isFeatured
-                    ? "md:col-span-2 lg:col-span-2 lg:row-span-2"
-                    : "md:col-span-1"
-                } ${smallPlacement}`}
-              >
-                <motion.article
-                  className={`glass-panel flex h-full flex-col rounded-2xl p-6 shadow-card transition-colors sm:p-8 ${
-                    isFeatured ? "min-h-[320px] lg:min-h-[420px]" : ""
-                  }`}
-                  whileHover={{
-                    scale: 1.02,
-                    boxShadow:
-                      "0 32px 96px -28px rgba(0,0,0,0.9), 0 0 48px -12px rgba(34,211,238,0.35)",
-                  }}
-                  transition={{ type: "spring", stiffness: 380, damping: 26 }}
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div
-                      className="flex size-12 items-center justify-center rounded-2xl bg-[var(--accent)]/15 text-[var(--accent)]"
-                      aria-hidden
-                    >
-                      <Icon className="size-6" strokeWidth={1.75} />
-                    </div>
-                    <PlaySoonBadge />
-                  </div>
-                  <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
-                    {app.category}
-                  </p>
-                  <h3 className="font-display mt-1 text-2xl font-bold text-[var(--text-primary)] sm:text-3xl">
-                    {app.name}
-                  </h3>
-                  <p className="mt-4 flex-1 text-sm leading-relaxed text-[var(--text-muted)] sm:text-base">
-                    {app.benefit}
-                  </p>
-                  <div className="mt-6 flex flex-wrap items-center gap-2 border-t border-[var(--border-subtle)] pt-5 text-xs text-[var(--text-muted)]">
-                    <span className="rounded-md bg-[var(--surface)] px-2 py-1 font-mono text-[11px] text-[var(--highlight-muted)]">
-                      {app.version}
-                    </span>
-                    <span className="text-[var(--text-muted)]">·</span>
-                    <span>{app.status}</span>
-                  </div>
-                </motion.article>
-              </motion.li>
-            );
-          })}
+          {featuredApp ? (
+            <motion.li
+              key={featuredApp.name}
+              variants={fadeUp}
+              className="m-0 min-w-0 md:col-span-2 lg:max-w-none lg:flex-1 lg:self-start"
+            >
+              <AppCard app={featuredApp} isFeatured />
+            </motion.li>
+          ) : null}
+          <motion.li
+            variants={fadeUp}
+            className="m-0 flex min-w-0 flex-col gap-4 md:contents lg:flex lg:flex-col lg:gap-4 lg:w-[min(100%,22rem)] lg:shrink-0 lg:self-start"
+          >
+            {otherApps.map((app) => (
+              <div key={app.name} className="min-h-0 md:h-full lg:h-auto">
+                <AppCard app={app} />
+              </div>
+            ))}
+          </motion.li>
         </motion.ul>
       </div>
     </SectionWrapper>

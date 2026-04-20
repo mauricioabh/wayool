@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 type ContentPageProps = {
   eyebrow: string;
   title: string;
-  description?: string;
+  description?: ReactNode;
   children: ReactNode;
 };
 
@@ -23,9 +23,11 @@ export function ContentPage({
         {title}
       </h1>
       {description ? (
-        <p className="mt-4 max-w-2xl text-lg text-[var(--text-muted)]">{description}</p>
+        <div className="mt-4 max-w-2xl space-y-2 text-lg text-[var(--text-muted)] [&_a]:font-semibold [&_a]:text-[var(--accent)] [&_a]:underline-offset-2 hover:[&_a]:underline">
+          {description}
+        </div>
       ) : null}
-      <div className="mt-12 space-y-6 text-base leading-relaxed text-[var(--text-muted)] [&_h2]:mt-12 [&_h2]:font-display [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-[var(--text-primary)] [&_h2]:first:mt-0 [&_p+p]:mt-4 [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-5 [&_li]:marker:text-[var(--accent)] [&_a]:font-semibold [&_a]:text-[var(--accent)] [&_a]:underline-offset-2 hover:[&_a]:underline [&_strong]:font-semibold [&_strong]:text-[var(--text-primary)]">
+      <div className="mt-12 space-y-6 text-base leading-relaxed text-[var(--text-muted)] [&_h2]:mt-12 [&_h2]:font-display [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-[var(--text-primary)] [&_h2]:first:mt-0 [&_h3]:mt-8 [&_h3]:font-display [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-[var(--text-primary)] [&_h3]:first:mt-0 [&_p+p]:mt-4 [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-5 [&_li]:marker:text-[var(--accent)] [&_a]:font-semibold [&_a]:text-[var(--accent)] [&_a]:underline-offset-2 hover:[&_a]:underline [&_strong]:font-semibold [&_strong]:text-[var(--text-primary)]">
         {children}
       </div>
       <div className="mt-16 border-t border-[var(--border-subtle)] pt-8">
