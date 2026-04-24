@@ -33,7 +33,7 @@ const APPS: AppShowcaseItem[] = [
     featured: true,
   },
   {
-    name: "Live countdown for Fortnite",
+    name: "Live Countdown: for Fortnite Fans",
     category: "Fortnite",
     icon: Timer,
     benefit:

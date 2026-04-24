@@ -4,9 +4,9 @@ import { ContentPage } from "@/app/_components/ContentPage";
 const CANONICAL = "https://wayool.com/legal/privacy/live-countdown-fortnite";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — Live countdown for Fortnite (Mobile App) | Wayool",
+  title: "Privacy Policy — Live Countdown: for Fortnite Fans (Mobile App) | Wayool",
   description:
-    "Privacy policy for the Live countdown for Fortnite mobile app (Android) from Wayool (Mexico): account data, favorites and history, device logs, legal bases, sharing, retention, your rights, and contact. Effective April 23, 2026.",
+    "Privacy policy for the Live Countdown: for Fortnite Fans mobile app (Android) from Wayool (Mexico): account data, favorites and history, device logs, legal bases, sharing, retention, your rights, and contact. Effective April 23, 2026.",
   alternates: {
     canonical: CANONICAL,
   },
@@ -16,7 +16,7 @@ export default function LiveCountdownFortnitePrivacyPage() {
   return (
     <ContentPage
       eyebrow="Legal"
-      title="Privacy Policy — Live countdown for Fortnite (Mobile App)"
+      title="Privacy Policy — Live Countdown: for Fortnite Fans (Mobile App)"
       description={
         <>
           <p className="m-0">
@@ -41,8 +41,8 @@ export default function LiveCountdownFortnitePrivacyPage() {
     >
       <p>
         This Privacy Policy explains how Wayool (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;)
-        collects, uses, and shares personal information when you use the Live countdown for Fortnite
-        mobile application (the &quot;App&quot;).
+        collects, uses, and shares personal information when you use the Live Countdown: for Fortnite
+        Fans mobile application (the &quot;App&quot;).
       </p>
       <p>
         The current version of this Privacy Policy is available at:{" "}
