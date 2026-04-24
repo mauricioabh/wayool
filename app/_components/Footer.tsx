@@ -22,6 +22,10 @@ const FOOTER_COLS = [
         label: "Luz Parroquial — Privacy",
         href: "/legal/privacy/luz-parroquial",
       },
+      {
+        label: "Live countdown for Fortnite — Privacy",
+        href: "/legal/privacy/live-countdown-fortnite",
+      },
       { label: "Terms", href: "/legal/terms" },
       { label: "Cookies", href: "/legal/cookies" },
     ],

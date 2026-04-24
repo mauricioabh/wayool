@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
-import { HeartPulse, Landmark, Smartphone, Sun } from "lucide-react";
+import { HeartPulse, Landmark, Smartphone, Sun, Timer } from "lucide-react";
 import Link from "next/link";
 import { SectionWrapper } from "@/app/_components/ui/SectionWrapper";
 import { fadeUp, staggerContainer } from "@/app/_lib/motion";
@@ -29,6 +29,18 @@ const APPS: AppShowcaseItem[] = [
     playSoonLabel: "Coming soon · Google Play",
     privacyHref: "/legal/privacy/luz-parroquial",
     version: "v0.1.0",
+    status: "In development",
+    featured: true,
+  },
+  {
+    name: "Live countdown for Fortnite",
+    category: "Fortnite",
+    icon: Timer,
+    benefit:
+      "Live countdowns for Fortnite seasons, events, and shop resets—timed consistently from event schedules so you never miss a drop. Browse the shop and jam tracks, star favorites, and keep history in sync when you sign in.",
+    playSoonLabel: "Coming soon · Google Play",
+    privacyHref: "/legal/privacy/live-countdown-fortnite",
+    version: "v1.0.0",
     status: "In development",
     featured: true,
   },
@@ -122,7 +134,7 @@ function AppCard({ app, isFeatured = false }: { app: AppShowcaseItem; isFeatured
 }
 
 export function AppShowcase() {
-  const featuredApp = APPS.find((a) => a.featured);
+  const featuredApps = APPS.filter((a) => a.featured);
   const otherApps = APPS.filter((a) => !a.featured);
   return (
     <SectionWrapper id="apps" className="relative z-[1] scroll-mt-24 py-20 sm:py-24">
@@ -144,7 +156,7 @@ export function AppShowcase() {
             variants={fadeUp}
             className="font-display mt-3 text-3xl font-bold tracking-tight text-[var(--text-primary)] sm:text-4xl md:text-5xl"
           >
-            Three products, three promises.
+            Four products, four promises.
           </motion.h2>
           <motion.p variants={fadeUp} className="mt-4 text-[var(--text-muted)]">
             Each one is built for responsive web and mobile: smooth flows, clear
@@ -160,13 +172,18 @@ export function AppShowcase() {
           variants={staggerContainer}
           aria-label="Wayool apps"
         >
-          {featuredApp ? (
+          {featuredApps.length > 0 ? (
             <motion.li
-              key={featuredApp.name}
               variants={fadeUp}
               className="m-0 min-w-0 md:col-span-2 lg:max-w-none lg:flex-1 lg:self-start"
             >
-              <AppCard app={featuredApp} isFeatured />
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:flex lg:flex-row lg:gap-4">
+                {featuredApps.map((app) => (
+                  <div key={app.name} className="min-w-0 lg:flex-1">
+                    <AppCard app={app} isFeatured />
+                  </div>
+                ))}
+              </div>
             </motion.li>
           ) : null}
           <motion.li
