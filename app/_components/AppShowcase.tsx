@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 import { HeartPulse, Landmark, Smartphone, Sun, Timer } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { SectionWrapper } from "@/app/_components/ui/SectionWrapper";
 import { fadeUp, staggerContainer } from "@/app/_lib/motion";
@@ -13,6 +14,7 @@ type AppShowcaseItem = {
   icon: LucideIcon;
   benefit: string;
   playSoonLabel?: string;
+  apkDownloadHref?: string;
   privacyHref?: string;
   version: string;
   status: string;
@@ -26,7 +28,7 @@ const APPS: AppShowcaseItem[] = [
     icon: Sun,
     benefit:
       "Catholic prayer and devotion in Spanish—classic prayers, novenas, the rosary, and guided audio for when you want to pray without staring at the screen. Create an account to keep favorites and progress in sync across devices.",
-    playSoonLabel: "Coming soon · Google Play",
+    apkDownloadHref: "/api/downloads/luz-parroquial",
     privacyHref: "/legal/privacy/luz-parroquial",
     version: "v0.1.0",
     status: "In development",
@@ -73,6 +75,27 @@ function PlaySoonBadge({ label = "Coming soon · Web & mobile" }: { label?: stri
   );
 }
 
+function GooglePlayDownloadButton({ href }: { href: string }) {
+  return (
+    <a
+      href={href}
+      download="luz-parroquial.apk"
+      className="inline-flex min-h-11 shrink-0 items-center rounded-lg p-0.5 transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] sm:min-h-12 md:min-h-14"
+      aria-label="Download Luz Parroquial APK for Android"
+    >
+      <Image
+        src="/google-play-badge.png"
+        alt="Get it on Google Play"
+        width={646}
+        height={250}
+        sizes="(max-width: 639px) 132px, (max-width: 1023px) 150px, 168px"
+        className="h-11 w-auto sm:h-12 md:h-14"
+        priority={false}
+      />
+    </a>
+  );
+}
+
 function AppCard({ app, isFeatured = false }: { app: AppShowcaseItem; isFeatured?: boolean }) {
   const Icon = app.icon;
   return (
@@ -94,7 +117,11 @@ function AppCard({ app, isFeatured = false }: { app: AppShowcaseItem; isFeatured
         >
           <Icon className="size-6" strokeWidth={1.75} />
         </div>
-        <PlaySoonBadge label={app.playSoonLabel} />
+        {app.apkDownloadHref ? (
+          <GooglePlayDownloadButton href={app.apkDownloadHref} />
+        ) : app.playSoonLabel ? (
+          <PlaySoonBadge label={app.playSoonLabel} />
+        ) : null}
       </div>
 
       <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
