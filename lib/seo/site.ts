@@ -1,0 +1,32 @@
+export const PRODUCT_NAME = "Wayool";
+
+export const DEFAULT_DESCRIPTION =
+  "Compact product engineering studio: polished web and mobile apps, performance-minded delivery, and launches built to scale.";
+
+export const DEFAULT_OG_IMAGE_PATH = "/icons/icon-512.png";
+
+export function getSiteUrl(): string {
+  const configured = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (configured) return configured.replace(/\/$/, "");
+
+  const vercel = process.env.VERCEL_URL?.trim();
+  if (vercel) return `https://${vercel.replace(/\/$/, "")}`;
+
+  return "https://wayool.com";
+}
+
+export const PRODUCTION_GIT_BRANCH = "main";
+
+export function isPreviewDeployment(): boolean {
+  if (process.env.VERCEL_ENV === "preview") return true;
+
+  const branch = process.env.VERCEL_GIT_COMMIT_REF?.trim();
+  if (branch && branch !== PRODUCTION_GIT_BRANCH) return true;
+
+  return false;
+}
+
+export function allowSearchIndexing(): boolean {
+  if (process.env.OMNI_ALLOW_PREVIEW_INDEX === "true") return true;
+  return !isPreviewDeployment();
+}
