@@ -1,3 +1,28 @@
+# Wayool
+
+## What is Wayool?
+
+Wayool is a **web and mobile product studio** that ships polished apps with performance-minded delivery — from landing pages and PWAs to full-stack products on Vercel.
+
+**Live:** https://wayool.com
+
+## Who is it for?
+
+Founders and teams who need a compact engineering partner for production-ready web and mobile experiences.
+
+## FAQ
+
+### What does Wayool build?
+Next.js web apps, React Native / Expo mobile apps, and studio sites with SEO, PWA, and deployment on Vercel.
+
+### Where can I see shipped apps?
+The homepage showcases Luz Parroquial, Live Countdown for Fortnite Fans, and other studio projects with live links.
+
+### How do I contact Wayool?
+Email support@wayool.com or use the site contact paths in the footer.
+
+---
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
