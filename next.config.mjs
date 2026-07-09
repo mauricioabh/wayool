@@ -1,6 +1,7 @@
 import { spawnSync } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import withSerwistInit from "@serwist/next";
+import { withSentryConfig } from "@sentry/nextjs";
 
 const revision =
   spawnSync("git", ["rev-parse", "HEAD"], { encoding: "utf-8" }).stdout?.trim() ||
@@ -16,4 +17,11 @@ const withSerwist = withSerwistInit({
 /** @type {import('next').NextConfig} */
 const nextConfig = {};
 
-export default withSerwist(nextConfig);
+const serwistConfig = withSerwist(nextConfig);
+
+export default withSentryConfig(serwistConfig, {
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT ?? "wayool",
+  silent: !process.env.CI,
+  widenClientFileUpload: true,
+});
