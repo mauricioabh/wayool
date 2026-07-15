@@ -2,7 +2,14 @@
 
 import { motion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
-import { HeartPulse, Landmark, Smartphone, Sun, Timer } from "lucide-react";
+import {
+  BookMarked,
+  ExternalLink,
+  Smartphone,
+  Sun,
+  Timer,
+  Tv,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { SectionWrapper } from "@/app/_components/ui/SectionWrapper";
@@ -16,6 +23,7 @@ type AppShowcaseItem = {
   playSoonLabel?: string;
   apkDownloadHref?: string;
   privacyHref?: string;
+  visitHref?: string;
   version: string;
   status: string;
   featured?: boolean;
@@ -42,27 +50,30 @@ const APPS: AppShowcaseItem[] = [
       "Live countdowns for Fortnite seasons, events, and shop resets—timed consistently from event schedules so you never miss a drop. Browse the shop and jam tracks, star favorites, and keep history in sync when you sign in.",
     playSoonLabel: "Coming soon · Google Play",
     privacyHref: "/legal/privacy/live-countdown-fortnite",
+    visitHref: "https://livecountdown.wayool.com",
     version: "v1.0.0",
-    status: "In development",
+    status: "Live",
     featured: true,
   },
   {
-    name: "Vaulto",
-    category: "Personal finance",
-    icon: Landmark,
+    name: "Watchily",
+    category: "TV & streaming",
+    icon: Tv,
     benefit:
-      "See where money goes without spreadsheet fatigue—clearer monthly decisions with less friction.",
-    version: "v1.1.0",
-    status: "Private beta",
+      "Track what you watch across shows and seasons—pick up where you left off without the spreadsheet chaos.",
+    visitHref: "https://watchily-ho.vercel.app",
+    version: "v1.0.0",
+    status: "Live",
   },
   {
-    name: "Pulseia",
-    category: "Health & wellness",
-    icon: HeartPulse,
+    name: "MangaTrack",
+    category: "Manga & reading",
+    icon: BookMarked,
     benefit:
-      "Build habits that stick: lightweight nudges that adapt to how you actually live.",
-    version: "v0.3.2",
-    status: "Launch Q3 2026",
+      "Follow manga series and reading progress in one place—know what’s next without losing your place.",
+    visitHref: "https://mangatrack.wayool.com",
+    version: "v1.0.0",
+    status: "Live",
   },
 ];
 
@@ -96,6 +107,21 @@ function GooglePlayDownloadButton({ href }: { href: string }) {
   );
 }
 
+function VisitSiteButton({ href, name }: { href: string; name: string }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex min-h-10 shrink-0 items-center gap-1.5 rounded-full border border-[var(--accent)]/40 bg-[var(--accent)]/10 px-4 py-2 text-xs font-semibold text-[var(--accent)] transition-colors hover:border-[var(--accent)] hover:bg-[var(--accent)]/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+      aria-label={`Open ${name} website`}
+    >
+      Visit site
+      <ExternalLink className="size-3.5 shrink-0" aria-hidden />
+    </a>
+  );
+}
+
 function AppCard({ app, isFeatured = false }: { app: AppShowcaseItem; isFeatured?: boolean }) {
   const Icon = app.icon;
   return (
@@ -117,11 +143,16 @@ function AppCard({ app, isFeatured = false }: { app: AppShowcaseItem; isFeatured
         >
           <Icon className="size-6" strokeWidth={1.75} />
         </div>
-        {app.apkDownloadHref ? (
-          <GooglePlayDownloadButton href={app.apkDownloadHref} />
-        ) : app.playSoonLabel ? (
-          <PlaySoonBadge label={app.playSoonLabel} />
-        ) : null}
+        <div className="flex flex-wrap items-center justify-end gap-2">
+          {app.visitHref ? (
+            <VisitSiteButton href={app.visitHref} name={app.name} />
+          ) : null}
+          {app.apkDownloadHref ? (
+            <GooglePlayDownloadButton href={app.apkDownloadHref} />
+          ) : app.playSoonLabel ? (
+            <PlaySoonBadge label={app.playSoonLabel} />
+          ) : null}
+        </div>
       </div>
 
       <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
@@ -183,7 +214,7 @@ export function AppShowcase() {
             variants={fadeUp}
             className="font-display mt-3 text-3xl font-bold tracking-tight text-[var(--text-primary)] sm:text-4xl md:text-5xl"
           >
-            Four products, four promises.
+            Products built for daily rituals.
           </motion.h2>
           <motion.p variants={fadeUp} className="mt-4 text-[var(--text-muted)]">
             Each one is built for responsive web and mobile: smooth flows, clear
