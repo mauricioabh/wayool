@@ -3,7 +3,9 @@
 import { motion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 import {
+  Activity,
   BookMarked,
+  Bus,
   ExternalLink,
   Smartphone,
   Sun,
@@ -72,6 +74,26 @@ const APPS: AppShowcaseItem[] = [
     benefit:
       "Follow manga series and reading progress in one place—know what’s next without losing your place.",
     visitHref: "https://mangatrack.wayool.com",
+    version: "v1.0.0",
+    status: "Live",
+  },
+  {
+    name: "Health Erino",
+    category: "Health & wellness",
+    icon: Activity,
+    benefit:
+      "Track habits, routines, and wellness goals in one calm dashboard—small daily wins without the overwhelm.",
+    visitHref: "https://health-erino.vercel.app",
+    version: "v1.0.0",
+    status: "Live",
+  },
+  {
+    name: "CRT Líneas",
+    category: "Public transit",
+    icon: Bus,
+    benefit:
+      "Browse Costa Rica bus routes and lines—find the right connection faster when you need to move.",
+    visitHref: "https://crt-lineas.vercel.app",
     version: "v1.0.0",
     status: "Live",
   },
