@@ -10,6 +10,7 @@ import {
   Smartphone,
   Sun,
   Timer,
+  TrendingUp,
   Tv,
 } from "lucide-react";
 import Image from "next/image";
@@ -94,6 +95,16 @@ const APPS: AppShowcaseItem[] = [
     benefit:
       "Browse Costa Rica bus routes and lines—find the right connection faster when you need to move.",
     visitHref: "https://crt-lineas.vercel.app",
+    version: "v1.0.0",
+    status: "Live",
+  },
+  {
+    name: "ArbPulse",
+    category: "Markets & arbitrage",
+    icon: TrendingUp,
+    benefit:
+      "Spot arbitrage opportunities at a glance—live signals that surface price gaps before they close.",
+    visitHref: "https://arbpulse.wayool.com",
     version: "v1.0.0",
     status: "Live",
   },
