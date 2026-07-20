@@ -7,6 +7,7 @@ import {
   BookMarked,
   Bus,
   ExternalLink,
+  Rocket,
   Smartphone,
   Sun,
   Timer,
@@ -103,6 +104,16 @@ const APPS: AppShowcaseItem[] = [
     benefit:
       "Spot arbitrage opportunities at a glance—live signals that surface price gaps before they close.",
     visitHref: "https://arbpulse.wayool.com",
+    version: "v1.0.0",
+    status: "Live",
+  },
+  {
+    name: "te-kae",
+    category: "Hackathons",
+    icon: Rocket,
+    benefit:
+      "Discover active online hackathons in one place—filter by platform, track deadlines, and jump into the next build challenge.",
+    visitHref: "https://te-kae.wayool.com",
     version: "v1.0.0",
     status: "Live",
   },
