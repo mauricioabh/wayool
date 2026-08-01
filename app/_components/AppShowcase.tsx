@@ -13,6 +13,7 @@ import {
   Timer,
   TrendingUp,
   Tv,
+  Wallet,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -115,6 +116,16 @@ const APPS: AppShowcaseItem[] = [
       "Discover active online hackathons in one place—filter by platform, track deadlines, and jump into the next build challenge.",
     visitHref: "https://te-kae.wayool.com",
     version: "v1.0.0",
+    status: "Live",
+  },
+  {
+    name: "FinSos",
+    category: "Personal finance",
+    icon: Wallet,
+    benefit:
+      "Upload Banorte statement PDFs, track income and expenses in one dashboard, and ask Gemini about your cashflow—installable as a PWA.",
+    visitHref: "https://finsos.vercel.app",
+    version: "v0.1.0",
     status: "Live",
   },
 ];
