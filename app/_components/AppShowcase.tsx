@@ -42,7 +42,7 @@ const APPS: AppShowcaseItem[] = [
     icon: ShieldCheck,
     benefit:
       "Store service credentials safely and track monthly costs in one responsive PWA with shared vault access, payment visibility, and reminder workflows.",
-    visitHref: "https://passward-mauricioabh.vercel.app",
+    visitHref: "https://passward.wayool.com",
     version: "v1.0.0",
     status: "Live",
   },
