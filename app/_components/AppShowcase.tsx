@@ -8,6 +8,7 @@ import {
   ExternalLink,
   PhoneCall,
   Pill,
+  ShieldCheck,
   Rocket,
   Smartphone,
   Sun,
@@ -35,6 +36,16 @@ type AppShowcaseItem = {
 };
 
 const APPS: AppShowcaseItem[] = [
+  {
+    name: "Passward",
+    category: "Security & subscriptions",
+    icon: ShieldCheck,
+    benefit:
+      "Store service credentials safely and track monthly costs in one responsive PWA with shared vault access, payment visibility, and reminder workflows.",
+    visitHref: "https://passward-mauricioabh.vercel.app",
+    version: "v1.0.0",
+    status: "Live",
+  },
   {
     name: "Luz Parroquial — Prayer",
     category: "Prayer",
