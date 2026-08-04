@@ -3,10 +3,11 @@
 import { motion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 import {
-  Activity,
   BookMarked,
-  Bus,
+  Download,
   ExternalLink,
+  PhoneCall,
+  Pill,
   Rocket,
   Smartphone,
   Sun,
@@ -80,20 +81,20 @@ const APPS: AppShowcaseItem[] = [
   },
   {
     name: "Health Erino",
-    category: "Health & wellness",
-    icon: Activity,
+    category: "Medications",
+    icon: Pill,
     benefit:
-      "Track habits, routines, and wellness goals in one calm dashboard—small daily wins without the overwhelm.",
+      "Manage medications from Google Sheets with an AI voice assistant—check stock, expiry, and answers hands-free on web or mobile.",
     visitHref: "https://health-erino.vercel.app",
     version: "v1.0.0",
     status: "Live",
   },
   {
     name: "CRT Líneas",
-    category: "Public transit",
-    icon: Bus,
+    category: "Telecom",
+    icon: PhoneCall,
     benefit:
-      "Browse Costa Rica bus routes and lines—find the right connection faster when you need to move.",
+      "Verify phone lines against Mexico’s CRT company portals—track activation status across carriers from one dashboard.",
     visitHref: "https://crt-lineas.vercel.app",
     version: "v1.0.0",
     status: "Live",
@@ -123,12 +124,24 @@ const APPS: AppShowcaseItem[] = [
     category: "Personal finance",
     icon: Wallet,
     benefit:
-      "Upload Banorte statement PDFs, track income and expenses in one dashboard, and ask Gemini about your cashflow—installable as a PWA.",
+      "Upload bank statement PDFs, track income and expenses in one dashboard, and ask Gemini about your cashflow.",
     visitHref: "https://finsos.vercel.app",
     version: "v0.1.0",
     status: "Live",
   },
 ];
+
+function PwaBadge() {
+  return (
+    <span
+      className="inline-flex items-center gap-1 rounded-md border border-[var(--accent)]/25 bg-[var(--accent)]/10 px-2 py-1 text-[11px] font-semibold text-[var(--accent)]"
+      title="Progressive Web App — install from your browser"
+    >
+      <Download className="size-3 shrink-0" aria-hidden />
+      PWA · Installable
+    </span>
+  );
+}
 
 function PlaySoonBadge({ label = "Coming soon · Web & mobile" }: { label?: string }) {
   return (
@@ -216,12 +229,14 @@ function AppCard({ app }: { app: AppShowcaseItem }) {
         {app.benefit}
       </p>
 
-      <div className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-[var(--border-subtle)] pt-5 text-xs text-[var(--text-muted)]">
+      <div className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-2 border-t border-[var(--border-subtle)] pt-5 text-xs text-[var(--text-muted)]">
         <span className="rounded-md bg-[var(--surface)] px-2 py-1 font-mono text-[11px] text-[var(--highlight-muted)]">
           {app.version}
         </span>
         <span className="text-[var(--text-muted)]">·</span>
         <span>{app.status}</span>
+        <span className="text-[var(--text-muted)]">·</span>
+        <PwaBadge />
         {app.privacyHref ? (
           <>
             <span className="text-[var(--text-muted)]">·</span>
